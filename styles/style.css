@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: freight-sans-pro, sans-serif;
+}
+
+p {
+  font-family: freight-text-pro, serif;
+  font-size: 18px;
+}
+
+.banner {
+  background-color: #645862;
+  background-image: url('landing4.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  height: 100%;
+  display: flex;
+}
+
+.banner .inner {
+  background: rgba(52, 27, 43, 0.5);
+  color: white;
+  display: inline-block;
+  text-align: center;
+  padding: 3em;
+  margin: auto;
+}
+
+.banner .inner header {
+  display: block;
+  border-bottom: solid 2px;
+  border-top: solid 2px;
+  margin: 0 0 2em 0;
+  padding: 3px 0 3px 0;
+}
+
+.banner .inner header h2 {
+  border-bottom: solid 2px;
+  border-top: solid 2px;
+  font-size: 2.5em;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  margin: 0;
+  padding-left: 0.05em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.banner .inner p {
+  max-width: 275px;
+  display: inline-block;
+}
+
+.banner .inner footer {
+  margin: 2em 0 0 0;
+}
+
+.button {
+  background: none;
+  border: solid 1px;
+  color: inherit;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 2px;
+  min-width: 18em;
+  padding: 0.75em 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.button.fit {
+  width: 100%;
+}
+
+@keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes reveal-header { 0% { opacity: 0; } 100% { opacity: 1; } }
+
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+svg {
+  font-family: 'helvetica neue', helvetica, arial, sans-serif;
+  font-size: 10px;
+  color: #888;
+}
