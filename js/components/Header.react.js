@@ -14,7 +14,6 @@ function isWeight(n){
   return true;
 }
 
-
 var Header = React.createClass({
   render: function(){
     return (
@@ -32,7 +31,6 @@ var Header = React.createClass({
   },
 
   _onSave: function(text){
-    console.log('on save', text);
     if (text.trim()) {
       WeightActions.create(text);
     }

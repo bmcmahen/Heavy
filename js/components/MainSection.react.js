@@ -4,40 +4,43 @@ var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var _ = require('underscore');
 var WeightItem = require('./WeightItem.react');
+var Graph = require('./Graph.react');
+var WeightActions = require('../actions/WeightActions');
+
+var debug = require('debug')('heavy:components:mainsection.react');
+
+var ListItem = React.createClass({
+  render: function(){
+    return (
+      <li key={this.props.weight.date}>
+        <span>{this.props.weight.weight}</span>
+        <button onClick={this.deleteItem}>delete</button>
+      </li>
+    )
+  },
+
+  deleteItem: function(){
+    // what if we are dealing with non synced data?
+    WeightActions.destroy(this.props.weight._id);
+  }
+})
 
 var MainSection = React.createClass({
 
   render: function(){
-
-
+    
     var weights = this.props.weightsStore.weights;
 
-    // var date_sort_asc = function (date1, date2) {
-    //   if (date1.date > date2.date) return -1;
-    //   if (date1.date < date2.date) return 1;
-    //   return 0;
-    // };
+    debug('rendering weights', weights);
 
-    // weights.sort(date_sort_asc);
-
-    if (!weights) return (
-      <section id='main'>
-      </section>
-    )
-
-    var listItems = [];
-
-    for (var key in weights) {
-      var w = weights[key].weight;
-      var listItem = <li><span>{w}</span></li>
-      listItems.push(listItem);
-    }
+    var listItems = weights.map(function(weight){
+       return <ListItem weight={weight} key={weight.date} />
+    });
 
     return (
       <section id='main'>
-        <ul id='weight-list'>
-          {listItems}
-        </ul>
+        <ul id='weight-list'> {listItems} </ul>
+        <Graph weights={this.props.weightsStore.weights} />
       </section>
     )
   }

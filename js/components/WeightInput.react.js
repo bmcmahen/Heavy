@@ -51,7 +51,6 @@ var FieldInput = React.createClass({
   
   onSubmit: function(e) {
     if (e) e.preventDefault();
-    console.log('HELLO');
     var validation = this.props.validation;
     if (validation && !validation(this.state.value)) {
       return this.setState({ error: 'Invalid input' });

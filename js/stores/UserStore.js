@@ -18,7 +18,7 @@ var UserStore = CreateStore(AppDispatcher, {
   initialize: function() {
     this.loading = false;
     this.error = null;
-    this.attr = {};
+    this.attr = [];
 
     this.bindActions(
       UserConstants.LOAD_USER, this.onLoadUser,
@@ -29,7 +29,7 @@ var UserStore = CreateStore(AppDispatcher, {
 
   onLoadUser: function(){
     this.loading = true;
-    this.attr = {};
+    this.attr = [];
     this.error = null;
     this.emit('change');
   },

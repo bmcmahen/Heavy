@@ -6,7 +6,10 @@
 
 var d3 = require('d3-browserify');
 var React = require('react');
-var Graph = require('./Graph-d3');
+var GraphD3 = require('./Graph-D3');
+
+var debug = require('debug')('heavy:components/graph.react');
+
 
 /**
  * Graph
@@ -17,11 +20,11 @@ var Graph = require('./Graph-d3');
 
 var Graph = React.createClass({
   render: function(){
-    return <svg></svg>
+    return <div></div>
   },
 
   componentDidMount: function(){
-    this.graph = new Graph(this.getDOMNode(), this.props);
+    this.graph = new GraphD3(this.getDOMNode(), this.props);
   },
 
   shouldComponentUpdate: function(props){
@@ -32,3 +35,5 @@ var Graph = React.createClass({
   }
 
 });
+
+module.exports = Graph;

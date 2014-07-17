@@ -4,6 +4,7 @@
 
 var d3 = require('d3-browserify');
 var randomColor = require('randomcolor');
+var debug = require('debug')('heavy:components:graph');
 
 /**
  * Expose Graph
@@ -13,7 +14,7 @@ module.exports = Graph;
 
 // contant variables
 var margin = {top: 20, right: 20, bottom: 30, left: 50};
-var parseDate = d3.time.format('%x').parse;
+var parseDate = d3.time.format.iso.parse;
 var colors = randomColor({ count: 20 });
 
 /**
@@ -23,10 +24,14 @@ var colors = randomColor({ count: 20 });
 
 function Graph(el, props){
   if (!(this instanceof Graph)) return new Graph(el, props);
+  debug('creating graph with %j', props);
   this.el = d3.select(el);
-  this.weights = props;
+  if (props.weights.length){
+  this.weights = [props.weights];
   this.weights.forEach(this.prepareData.bind(this));
-  this.draw();
+} else {
+  this.setSize();
+}
 }
 
 Graph.prototype.draw = function(){
@@ -45,7 +50,7 @@ Graph.prototype.draw = function(){
 Graph.prototype.prepareData = function(userWeights){
   userWeights.forEach(function(d){
     if (typeof d.date == 'string') {
-      d.date = parseDate(d.date);
+      d.parsedDate = parseDate(d.date);
     }
   }.bind(this));
   return this;
@@ -72,10 +77,9 @@ Graph.prototype.setSize = function(){
     .scale(this.y)
     .orient('left');
   this.line = d3.svg.line()
-    .interpolate("monotone") 
-    .x(function(d){ return this.x(d.date); }.bind(this))
-    .y(function(d){ return this.y(d.weight); }.bind(this));
-  this.svg = d3.select('#graph').append('svg')
+    .x(function(d){ return this.x(d.parsedDate); }.bind(this))
+    .y(function(d){ return this.y(+d.weight); }.bind(this));
+  this.svg = this.el.append('svg')
     .attr('weight', this.width + margin.left + margin.right)
     .attr('height', this.height + margin.top + margin.bottom)
     .append('g')
@@ -96,8 +100,8 @@ Graph.prototype.getExtent = function(){
   var datesMin = [];
 
   this.weights.forEach(function(userWeights){
-    var dates = d3.extent(userWeights, function(d){ return d.date });
-    var weights = d3.extent(userWeights, function(d){ return d.weight });
+    var dates = d3.extent(userWeights, function(d){ return d.parsedDate });
+    var weights = d3.extent(userWeights, function(d){ return +d.weight });
     weightsMin.push(weights[0]);
     weightsMax.push(weights[1]);
     datesMin.push(dates[0]);
@@ -126,11 +130,25 @@ Graph.prototype.drawLine = function(weights, i){
 
 // call this when updating our lines
 Graph.prototype.update = function(props){
-  this.weights = props;
+  debug('updating graph with %j', props);
+  var weights = this.weights ? true : false;
+  this.weights = [props.weights];
   this.weights.forEach(this.prepareData.bind(this));
   this.getExtent();
-  this.svg.select(".y-axis").transition().duration(500).call(this.yAxis);
-  this.svg.select(".x-axis").transition().duration(500).call(this.xAxis);
+  if (!weights){
+    this.drawAxis();
+    this.drawLines();
+  }
+
+  this.yAxisEl.call(this.yAxis);
+  this.xAxisEl.call(this.xAxis);
+
+  console.log('draw lines?');
+
+  if (this.lines.length !== this.weights.length){
+    this.drawLines();
+  }
+
   this.lines.forEach(function(line){
     line.transition()
       .duration(500)
@@ -149,14 +167,14 @@ Graph.prototype.drawLines = function(){
 
 Graph.prototype.drawAxis = function(){
   
-  this.svg.append('g')
+  this.xAxisEl = this.svg.append('g')
     .attr('class', 'x-axis axis')
     .attr('transform', 'translate(0,' + this.height + ')')
-    .call(this.xAxis);
 
-  this.svg.append('g')
-    .attr('class', 'y-axis axis')
-    .call(this.yAxis)
+  this.xAxisEl.call(this.yAxis);
+
+  this.yAxisEl = this.svg.append('g').attr('class', 'y-axis axis');
+  this.yAxisEl.call(this.yAxis)
     .append('text')
     .attr('transform', 'rotate(-90)')
     .attr('y', 6)

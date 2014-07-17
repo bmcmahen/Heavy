@@ -55,10 +55,16 @@ var HeavyActions = {
   },
 
   destroy: function(id){
-    Dispatcher.handleViewAction({
-      actionType: Constants.DESTROY_WEIGHT,
-      id: id
-    });
+    Dispatcher.handleAction(Constants.DESTROY_WEIGHT, { id : id });
+    request
+      .del('/api/weights/'+id)
+      .end(function(res){
+        if (res.ok) {
+          Dispatcher.handleAction(Constants.DESTROY_WEIGHT_SUCCESS, { id : id });
+        } else {
+          Dispatcher.handleAction(Constants.DESTROY_WEIGHT_FAIL, { id: id, error: res.text });
+        }
+      });
   }
 
 };
