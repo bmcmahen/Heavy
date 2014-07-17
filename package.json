@@ -19,7 +19,8 @@
     "morgan": "^1.1.1",
     "express": "^4.6.1",
     "mongojs": "^0.13.0",
-    "debug": "^1.0.4"
+    "debug": "^1.0.4",
+    "randomcolor": "^0.1.1"
   },
   "devDependencies": {
     "gulp-myth": "^0.3.1",

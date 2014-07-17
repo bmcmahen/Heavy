@@ -21,9 +21,10 @@ var colors = randomColor({ count: 20 });
  * @param {Array} weights of users
  */
 
-function Graph(weights){
-  if (!(this instanceof Graph)) return new Graph(weights);
-  this.weights = weights;
+function Graph(el, props){
+  if (!(this instanceof Graph)) return new Graph(el, props);
+  this.el = d3.select(el);
+  this.weights = props;
   this.weights.forEach(this.prepareData.bind(this));
   this.draw();
 }
@@ -124,7 +125,8 @@ Graph.prototype.drawLine = function(weights, i){
 }
 
 // call this when updating our lines
-Graph.prototype.update = function(){
+Graph.prototype.update = function(props){
+  this.weights = props;
   this.weights.forEach(this.prepareData.bind(this));
   this.getExtent();
   this.svg.select(".y-axis").transition().duration(500).call(this.yAxis);
@@ -161,6 +163,4 @@ Graph.prototype.drawAxis = function(){
     .attr('dy', '.71em')
     .style('text-anchor', 'end')
     .text('Weight (lbs)');
-
-
 }

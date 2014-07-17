@@ -1,48 +1,34 @@
-var d3 = require('d3');
+/**  @jsx React.DOM  */
+
+/**
+ * Module dependencies
+ */
+
+var d3 = require('d3-browserify');
 var React = require('react');
+var Graph = require('./Graph-d3');
 
-function update(props){
-  return function(shape){
-    // update fn
-    shape
-      .attr('fill', props.color);
-  }
-}
-
-function getHeavyState(){
-  return {
-    allWeights: HeavyStore.getAll()
-  };
-}
+/**
+ * Graph
+ *
+ * This mostly defers to our d3 graph model, which it
+ * instantiates, and then updates when our props change.
+ */
 
 var Graph = React.createClass({
   render: function(){
-    return (
-      <svg width='200' height='200'></svg>
-    )
+    return <svg></svg>
   },
 
-  componentDidMount: function() {
-    HeavyStore.addChangeListener(this._onChange);
-    d3.select(this.getDOMNode())
-      .append('circle')
-      .call(update(this.props));
-  },
-
-  componentWillUnmount: function(){
-    HeavyStore.removeChangeListener(this._onChange);
+  componentDidMount: function(){
+    this.graph = new Graph(this.getDOMNode(), this.props);
   },
 
   shouldComponentUpdate: function(props){
-    d3.select(this.getDOMNode())
-      .select('circle')
-      .call(update(props));
+    this.graph.update(props);
 
     // skip React's render step
     return false;
-  },
-
-  _onChange: function(){
-    this.setState(getHeavyState());
   }
+
 });
