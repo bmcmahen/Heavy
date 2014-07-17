@@ -14,7 +14,6 @@ var morgan = require('morgan');
  */
 
 require('./auth');
-var db = require('./db');
 
 
 // Create our app
