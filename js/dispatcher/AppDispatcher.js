@@ -2,16 +2,18 @@ var Dispatcher = require('./Dispatcher');
 var _ = require('underscore');
 
 var AppDispatcher = _.extend(Dispatcher.prototype, {
-  handleViewAction: function(action) {
+  handleAction: function(action, payload) {
     this.dispatch({
       source: 'VIEW_ACTION',
+      payload: payload,
       action: action
     });
   },
 
-  handleSyncAction: function(action){
-    this.dispatch({
-      source: 'SYNC_ACTION',
+  handleSyncAction: function(action, payload){
+    this.dispatch({ 
+      source: 'SYNC_ACTION', 
+      payload: payload,
       action: action
     });
   }

@@ -1,83 +1,42 @@
-var koa = require('koa');
-var Router = require('koa-router');
-var bodyParser = require('koa-bodyparser');
-var comongo = require('co-mongo');
-var serve = require('koa-static');
-var session = require('koa-session');
-var path = require('path');
-var co = require('co');
-var passport = require('koa-passport');
-var views = require('koa-render');
+/**
+ * Module dependencies
+ */
 
-require('./auth');
-var config = require('./config.json');
-
-
-var app = koa()
+var express = require('express');
+var bodyParser = require('body-parser');
+var passport = require('passport');
+var session = require('express-session');
+var swig = require('swig');
+var morgan = require('morgan');
 
 /**
- * Middleware
+ * Relative dependencies
  */
+
+require('./auth');
+var db = require('./db');
+
+
+// Create our app
+var app = express();
+
+// app config
+app.engine('html', swig.renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+// app middleware
+app.use(morgan('short'));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser());
-app.use(views('./views', {
-  map: { html: 'handlebars' },
-  cache: false
-}));
-app.keys = ['secret'];
-app.use(session());
-app.use(serve(path.join(__dirname, 'public')), { defer: true })
+app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-/**
- * Routes
- */
-
-var routes = new Router();
-
-routes.get('/', function*(){
-  this.body = yield this.render('index');
-});
-
-routes.get('/auth/google', passport.authenticate('google'))
-
-routes.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/app',
-    failureRedirect: '/'
-  })
-);
-
-routes.get('/logout', function*(){
-  this.session = null;
-  this.redirect('/');
-});
-
-app.use(routes.middleware())
-
-// Require authentication for now
-app.use(function*(next) {
-  if (this.isAuthenticated()) {
-    yield next
-  } else {
-    this.redirect('/')
-  }
-});
-
-var secured = new Router()
-
-secured.get('/app', function*() {
-  this.body = yield this.render('app');
-});
-
-secured.get('/user/weights', function*(){
-  this.body = [
-    { weight: 180 , date: '08/10/2014', _id: 1 },
-    { weight: 160 , date: '08/15/2014', _id: 2 },
-    { weight: 140 , date: '08/25/2014', _id: 3 }
-  ]
-})
-
-app.use(secured.middleware())
+// routes
+app.use('/', require('./routes/app'));
+app.use('/api/user', require('./routes/user'));
+app.use('/api/weights', require('./routes/weights'));
+app.use('/auth', require('./routes/auth'));
 
 app.listen(3000);

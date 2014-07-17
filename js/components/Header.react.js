@@ -2,7 +2,7 @@
 
 var React = require('react');
 var WeightInput = require('./WeightInput.react');
-var HeavyActions = require('../actions/HeavyActions');
+var WeightActions = require('../actions/WeightActions');
 
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
@@ -32,8 +32,9 @@ var Header = React.createClass({
   },
 
   _onSave: function(text){
+    console.log('on save', text);
     if (text.trim()) {
-      HeavyActions.create(text);
+      WeightActions.create(text);
     }
   },
 

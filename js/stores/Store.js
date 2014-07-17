@@ -10,15 +10,16 @@ function Store(dispatcher){
 
 Emitter(Store.prototype);
 
-Store.prototype.handleAction = function(payload){
+Store.prototype.handleAction = function(dispatch){
   var handler;
-  var action = payload.action;
+  var action = dispatch.action;
+  var payload = dispatch.payload;
 
-  if (!!(handler = this.__actions__[action.actionType])) {
+  if (!!(handler = this.__actions__[action])) {
     if (typeof handler === 'function') {
-      handler.call(this, action.action);
+      handler.call(this, payload);
     } else if (handler && typeof this[handler] === 'function') {
-      this[handler].call(this, action.action);
+      this[handler].call(this, payload);
     }
   }
 };

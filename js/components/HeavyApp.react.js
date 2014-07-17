@@ -3,16 +3,16 @@
 var Header = require('./Header.react');
 var MainSection = require('./MainSection.react');
 var React = require('react');
-var HeavyStore = require('../stores/HeavyStore');
-var HeavyActions = require('../actions/HeavyActions');
+var WeightStore = require('../stores/WeightStore');
+var WeightActions = require('../actions/WeightActions');
 
 /**
- * Retrieve weight data from HeavyStore
+ * Retrieve weight data from WeightStore
  */
 
 function getHeavyState(){
   return {
-    weightsStore: HeavyStore
+    weightsStore: WeightStore
   };
 }
 
@@ -27,12 +27,12 @@ var HeavyApp = React.createClass({
   },
 
   componentDidMount: function() {
-    HeavyActions.load();
-    HeavyStore.bindListener(this._onChange);
+    WeightActions.load();
+    WeightStore.bindListener(this._onChange);
   },
 
   componentWillUnmount: function() {
-    HeavyStore.removeListener(this._onChange);
+    WeightStore.removeListener(this._onChange);
   },
 
   render: function() {

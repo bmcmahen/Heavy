@@ -1,6 +1,7 @@
-var passport = require('koa-passport');
+var passport = require('passport');
 var mongojs = require('mongojs');
-var db = mongojs('heavy', ['users']);
+var GoogleStrategy = require('passport-google').Strategy
+var db = require('./db');
 
 passport.serializeUser(function(user, done) {
   done(null, user._id);
@@ -9,8 +10,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
   db.users.findOne({ _id : mongojs.ObjectId(id) }, done);
 });
-
-var GoogleStrategy = require('passport-google').Strategy
 
 passport.use(new GoogleStrategy({
     returnURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/google/callback',
