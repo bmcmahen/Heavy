@@ -13,7 +13,8 @@ var ListItem = React.createClass({
   render: function(){
     return (
       <li key={this.props.weight.date}>
-        <span>{this.props.weight.weight}</span>
+        <span class='date'>{this.props.weight.pretty_date}</span>
+        <span class='weight'>{this.props.weight.weight}</span>
         <button onClick={this.deleteItem}>delete</button>
       </li>
     )

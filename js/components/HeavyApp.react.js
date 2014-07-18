@@ -1,10 +1,10 @@
 /**  @jsx React.DOM  */
 
-var Header = require('./Header.react');
-var MainSection = require('./MainSection.react');
+var Page = require('./Page.react');
 var React = require('react');
 var WeightStore = require('../stores/WeightStore');
-var WeightActions = require('../actions/WeightActions');
+var UserStore = require('../stores/UserStore');
+var AppStore = require('../stores/AppStore');
 
 /**
  * Retrieve weight data from WeightStore
@@ -12,7 +12,9 @@ var WeightActions = require('../actions/WeightActions');
 
 function getHeavyState(){
   return {
-    weightsStore: WeightStore
+    weightsStore: WeightStore,
+    userStore: UserStore,
+    appStore: AppStore
   };
 }
 
@@ -27,21 +29,27 @@ var HeavyApp = React.createClass({
   },
 
   componentDidMount: function() {
-    WeightActions.load();
     WeightStore.bindListener(this._onChange);
+    UserStore.bindListener(this._onChange);
+    AppStore.bindListener(this._onChange);
   },
 
   componentWillUnmount: function() {
     WeightStore.removeListener(this._onChange);
+    UserStore.removeListener(this._onChange);
+    AppStore.bindListener(this._onChange);
   },
 
   render: function() {
     return (
-      <div>
-        <Header />
-        <MainSection weightsStore={this.state.weightsStore}/>
+      <div class='HeavyApp'>
+        <Page 
+          weights={this.state.weightsStore} 
+          user={this.state.userStore}
+          app={this.state.appStore}
+        />
       </div>
-    );
+    )
   },
 
   _onChange: function(){

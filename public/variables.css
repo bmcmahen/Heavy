@@ -1,0 +1,71 @@
+:root {
+  
+  /* Colours */
+
+  var-blue: #049cdb;
+  var-green: #53BB64;
+  
+  /* Colour Types */
+
+  var-primary-colour: var(blue);
+  var-success-colour: var(green);
+  var-danger-colour: var(red);
+  var-warning-colour: var(yellow);
+
+  /* Extra Colours */
+
+  var-black: #2A2B24;
+  var-lighter-black: #736448;
+  var-white: #FFF;
+  var-light: #F8F8FA;
+  var-grey: #e9eef2;
+  var-grey-dark: #404040;
+  var-brown: #464952;
+  var-silver: #bdc3c7;
+  var-denim: #3c4e5a;
+  var-orange: #f04e28;
+  var-wine: #b2194b;
+  var-yellow: #f1e000;
+  var-purple: #4952a6;
+  var-navy: #00395d;
+  var-red: #f04e28;
+
+  /* Darkeners */
+
+  var-darken: rgba(0, 0, 0, 0.05);
+  var-darken0: rgba(0, 0, 0, 0.10);
+  var-darken1: rgba(0, 0, 0, 0.25);
+  var-darken2: rgba(0, 0, 0, 0.50);
+  var-darken3: rgba(0, 0, 0, 0.75);
+  var-darken4: rgba(0, 0, 0, 0.90);
+
+  /* Lighteners */
+
+  var-lighten: rgba(255, 255, 255, 0.05);
+  var-lighten0: rgba(255, 255, 255, 0.10);
+  var-lighten1: rgba(255, 255, 255, 0.25);
+  var-lighten2: rgba(255, 255, 255, 0.50);
+  var-lighten3: rgba(255, 255, 255, 0.75);
+  var-lighten4: rgba(255, 255, 255, 0.90);
+  
+  /* Sizing */
+
+  var-much-smaller: .69em;
+  var-smaller: .83em;
+  var-larger: 1.3em;
+  var-much-larger: 1.44em;
+  
+  /* Fonts */
+
+  var-primary-font: jaf-bernino-sans, 'helvetica neue', helvetica, arial, sans-serif;
+  var-paragraph-font: freight-text-pro, "Georgia", Times, serif;
+  var-primary-font-size: 15px;
+  var-heading-font: jaf-bernino-sans-condensed, helvetica, arial, sans-serif;
+  var-secondary-font: jaf-bernino-sans, 'helvetica neue', helvetica, arial, sans-serif;
+  var-small-font: jaf-bernino-sans, helvetica, arial, sans-serif;
+
+  /* Border-Radius */
+
+  var-rounded: 3px;
+  var-rounded-more: 10px;
+}

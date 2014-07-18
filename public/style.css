@@ -1,6 +1,4 @@
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -21,13 +19,9 @@ p {
   background-color: #645862;
   background-image: url('landing4.jpg');
   background-repeat: no-repeat;
-  -webkit-background-size: cover;
   background-size: cover;
   color: white;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -88,45 +82,9 @@ p {
   width: 100%;
 }
 
-@-webkit-keyframes reveal-banner {
-  0% {
-    opacity: 0;
-  }
+@keyframes reveal-banner { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes reveal-header { 0% { opacity: 0; } 100% { opacity: 1; } }
 
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes reveal-banner {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes reveal-header {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes reveal-header {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
 
 .axis path,
 .axis line {

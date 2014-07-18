@@ -1,0 +1,37 @@
+/* Grid */
+
+/* Padding */
+
+
+.pad05 { padding: 5px; }
+.pad1 { padding: 10px; }
+.pad2 { padding: 20px; }
+.pad3 { padding: 30px; }
+.pad4 { padding: 40px; }
+
+.pad05x { padding-left: 5px; padding-right: 5px; }
+.pad1x { padding-left: 10px; padding-right: 10px; }
+.pad2x { padding-left: 20px; padding-right: 20px; }
+.pad3x { padding-left: 30px; padding-right: 30px; }
+.pad4x { padding-left: 40px; padding-right: 40px; }
+
+.pad05y { padding-top: 5px; padding-bottom: 5px; }
+.pad1y { padding-top: 10px; padding-bottom: 10px; }
+.pad2y { padding-top: 20px; padding-bottom: 20px; }
+.pad3y { padding-top: 30px; padding-bottom: 30px; }
+.pad4y { padding-top: 40px; padding-bottom: 40px; }
+
+/* Borders */
+
+.border-all    { border: 1px solid var(darken0) }
+.border-top    { border-top: 1px solid var(darken0) }
+.border-right  { border-right: 1px solid var(darken0) }
+.border-bottom { border-bottom: 1px solid var(darken0) }
+.border-left   { border-left: 1px solid var(darken0) }
+
+.dark .border-all    { border: 1px solid var(lighten0) }
+.dark .border-top    { border-top: 1px solid var(lighten0) }
+.dark .border-right  { border-right: 1px solid var(lighten0) }
+.dark .border-bottom { border-bottom: 1px solid var(lighten0) }
+.dark .border-left   { border-left: 1px solid var(lighten0) }
+

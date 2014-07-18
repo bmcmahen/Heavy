@@ -7,8 +7,8 @@ auth.get('/google', passport.authenticate('google'))
 
 auth.get('/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/app',
-    failureRedirect: '/'
+    successRedirect: '/util/close',
+    failureRedirect: '/google'
   })
 );
 

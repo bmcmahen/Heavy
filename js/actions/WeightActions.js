@@ -29,12 +29,15 @@ var HeavyActions = {
 
   create: function(text) {
 
-    var date = moment().utc().format()
+    var current = moment();
+    var date = current.utc().format()
+    var pretty = current.format('MMMM Do YYYY')
     var id = clientId++;
 
     var weight = {
       weight: text,
-      date: date
+      date: date,
+      pretty_date: pretty
     };
 
     Dispatcher.handleAction( Constants.ADD_WEIGHT,{

@@ -1,0 +1,80 @@
+/*.our-stories-color {
+  background-color: #8E44AD;
+}
+
+.our-stories:active {
+  background-color: color(#8E44AD shade(20%));
+}
+
+.what-is-color {
+  background-color: #95A5A6;
+}
+
+.what-is-color:active {
+  background-color: color(#95A5A6 shade(20%));
+}
+
+.timeline-color {
+  background-color: #E74C3C;
+}
+
+.timeline-color:active {
+  background-color: color(#E74C3C shade(20%));
+}
+
+.people-color {
+  background-color: #AAB240;
+}
+
+.people-color:active {
+  background-color: color(#AAB240 shade(20%));
+}
+
+.mindmap-color {
+  background-color: #ECF0F1;
+  color: #444 !important;
+}
+
+.mindmap-color:active {
+  background-color: color(#ECF0F1 shade(20%));
+}
+
+.institutions-color {
+  background-color: #E67E22;
+}
+
+.institutions-color:active {
+  background-color: color(#E67E22 shade(20%));
+}
+
+.database-color {
+  background-color: #16A085; 
+}
+
+.database-color:active {
+  background-color: color(#16A085 shade(20%));
+}
+
+.home-color {
+  background-color: #2ECC71;
+}
+
+.home-color:active {
+  background-color: color(#2ECC71 shade(20%));
+}
+
+.game-color {
+  background-color: #000;  
+}
+
+.game-color:active {
+  background-color: color(#000 shade(20%));
+}
+
+.world-color {
+  background-color: #3498DB;
+}
+
+.world-color:active {
+  background-color: color(#3498DB shade(20%));
+}*/

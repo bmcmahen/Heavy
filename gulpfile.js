@@ -3,13 +3,15 @@ var source = require('vinyl-source-stream');
 var myth = require('gulp-myth');
 var browserify = require('browserify');
 var reactify = require('reactify');
+var concat = require('gulp-concat');
 
 var paths = {
   scripts: ['js/**/*.js'],
   styles: ['styles/**/*.css']
 }
 gulp.task('styles', function(){
-  return gulp.src('styles/style.css')
+  return gulp.src(['styles/variables.css', 'styles/**/*.css'])
+    .pipe(concat('styles.css'))
     .pipe(myth())
     .pipe(gulp.dest('public'));
 });
